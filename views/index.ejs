@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+	<title>Page Title</title>
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+	<div class="container">
+		<h1><%= title %></h1>
+		<%= new Date() %>
+
+		<ul>
+			<% for (var i=0; i < users.length; i++) { %>
+				<li><%= users[i].name %></li>
+				<% } %>
+		</ul>
+		
+		<form action="/add" method="post">
+			<input type="text" name="newUser">
+			<input type="submit">
+		</form>
+	</div>
+	
+	<script src="jquery/dist/jquery.js"></script>
+	<script src="bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
