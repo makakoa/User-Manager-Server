@@ -138,7 +138,7 @@ var deleteUser = function(request, response) {
 
 app.all('*', function(request, response, next) {
 	response.header("Access-Control-Allow-Origin", "*");
-	response.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
+	response.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
 	response.header("Content-Type", "application/json");
 	next();
 })
