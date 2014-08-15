@@ -47,9 +47,9 @@ app.post('/add', function(req, res) {
 
 // redis url: redis://redistogo:24fbdf461f5cbfb355a43a2360a2a394@hoki.redistogo.com:10124 or process.env.RESDISTOGO_URL
 // for use: https://devcenter.heroku.com/articles/redistogo
-if ('redis://redistogo:24fbdf461f5cbfb355a43a2360a2a394@hoki.redistogo.com:10124') {
+if ('process.env.RESDISTOGO_URL') {
   
-  var rtg   = require("url").parse('redis://redistogo:24fbdf461f5cbfb355a43a2360a2a394@hoki.redistogo.com:10124');
+  var rtg   = require("url").parse('process.env.RESDISTOGO_URL');
   var redis = require("redis").createClient(rtg.port, rtg.hostname);
 
   redis.auth(rtg.auth.split(":")[1]);
@@ -138,7 +138,7 @@ var deleteUser = function(request, response) {
 
 app.all('*', function(request, response, next) {
 	response.header("Access-Control-Allow-Origin", "*");
-	response.header("Access-Control-Allow-Headers", "X-Requested-With");
+	response.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
 	response.header("Content-Type", "application/json");
 	next();
 })
