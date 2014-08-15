@@ -77,21 +77,21 @@ var User = nohm.model('User', {
 	}
 });
 
-var listUsers = function(request,response) {
+var listUsers = function(req,res) {
 	User.find(function (err, ids) {
 		var users= [];
 		var length = ids.length;
 		var count = 0;
 		console.log(ids, 'ids');
 		if(length === 0) {
-			response.send([]);
+			res.send([]);
 		} else {
 			ids.forEach(function(id) {
 				var user = new User();
 				user.load(id, function(err, props) {
 					users.push({id: this.id, firstName: props.firstName, lastName: props.lastName, email: props.email});
 					if(++count === length) {
-						response.send(users);
+						res.send(users);
 					}
 				});
 			});
@@ -99,26 +99,26 @@ var listUsers = function(request,response) {
 	});
 };
 
-var userDetails = function(request, response) {
-	User.load(request.params.id, function(err, properties) {
+var userDetails = function(req, res) {
+	User.load(req.params.id, function(err, properties) {
 		if(err) {
-			response.send(404);
+			res.send(404);
 		} else {
-			response.send(properties);
+			res.send(properties);
 		}
 	});
 };
 
 
-var createUser = function(request, response) {
+var createUser = function(req, res) {
 	var user = new User();
-	user.p(request.body);
+	user.p(req.body);
 	user.save(function(err) {
-		response.send(user.allProperties(true));
+		res.send(user.allProperties(true));
 	});
 }
 
-var updateUser = function(request, response) {
+var updateUser = function(req, res) {
 	var user = new User();
 	user.id = req.params.id;
 	user.p(req.body);
@@ -127,19 +127,20 @@ var updateUser = function(request, response) {
 	});
 }
 
-var deleteUser = function(request, response) {
+var deleteUser = function(req, res) {
 	var user = new User();
-	user.id = request.params.id;
+	user.id = req.params.id;
 	user.remove(function(err) {
-		response.send(204);
+		res.send(204);
 	});
 }
 
 
-app.all('*', function(request, response, next) {
-	response.header("Access-Control-Allow-Origin", "*");
-	response.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
-	response.header("Content-Type", "application/json");
+app.all('*', function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-requested-With");
+	res.header("Access-Control-Allow-Headers", "Content-Type");
+	res.header("Content-Type", "application/json");
 	next();
 })
 
