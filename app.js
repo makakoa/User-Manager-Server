@@ -1,15 +1,15 @@
 // app.js
 
 var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
+//var path = require('path');
+//var bodyParser = require('body-parser');
 var nohm = require('nohm').Nohm;
 
 var app = express();
 
 //app.set('view engine', 'ejs');
 //app.set('views', path.join(__dirname, 'views'));
-app.use(bodyParser());
+app.use(express.bodyParser());
 
 // path set to bower components
 //app.use(express.static(path.join(__dirname, 'bower_components/')));
@@ -47,9 +47,9 @@ app.post('/add', function(req, res) {
 
 // redis url: redis://redistogo:24fbdf461f5cbfb355a43a2360a2a394@hoki.redistogo.com:10124 or process.env.RESDISTOGO_URL
 // for use: https://devcenter.heroku.com/articles/redistogo
-if ('process.env.RESDISTOGO_URL') {
+if (process.env.RESDISTOGO_URL) {
   
-  var rtg   = require("url").parse('process.env.RESDISTOGO_URL');
+  var rtg   = require("url").parse(process.env.RESDISTOGO_URL);
   var redis = require("redis").createClient(rtg.port, rtg.hostname);
 
   redis.auth(rtg.auth.split(":")[1]);
