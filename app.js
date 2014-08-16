@@ -4,9 +4,9 @@ app.use(express.bodyParser());
 var nohm = require('nohm').Nohm;
 
 
-if (process.env.RESDISTOGO_URL) {
+if (process.env.REDISTOGO_URL) {
   
-  var rtg   = require("url").parse(process.env.RESDISTOGO_URL);
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   var redis = require("redis").createClient(rtg.port, rtg.hostname);
 
   redis.auth(rtg.auth.split(":")[1]);
