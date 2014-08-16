@@ -1,15 +1,15 @@
 // app.js
 
 var express = require('express');
-//var path = require('path');
-//var bodyParser = require('body-parser');
+var app = express();
+app.use(express.bodyParser());
 var nohm = require('nohm').Nohm;
 
-var app = express();
+
 
 //app.set('view engine', 'ejs');
 //app.set('views', path.join(__dirname, 'views'));
-app.use(express.bodyParser());
+
 
 // path set to bower components
 //app.use(express.static(path.join(__dirname, 'bower_components/')));
@@ -72,7 +72,7 @@ var User = nohm.model('User', {
 			type: 'string',
 		},
 		email: {
-			type: 'string'
+			type: 'string',
 		}
 	}
 });
@@ -97,7 +97,7 @@ var listUsers = function(req,res) {
 			});
 		}
 	});
-};
+}
 
 var userDetails = function(req, res) {
 	User.load(req.params.id, function(err, properties) {
@@ -116,7 +116,7 @@ var createUser = function(req, res) {
 	user.save(function(err) {
 		res.send(user.allProperties(true));
 	});
-};
+}
 
 var updateUser = function(req, res) {
 	var user = new User();
@@ -125,7 +125,7 @@ var updateUser = function(req, res) {
 	user.save(function(err) {
 		res.send(user.allProperties(true));
 	});
-};
+}
 
 var deleteUser = function(req, res) {
 	var user = new User();
@@ -139,7 +139,6 @@ var deleteUser = function(req, res) {
 app.all('*', function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.header("Access-Control-Allow-Headers", "Content-Type");
 	res.header("Content-Type", "application/json");
 	next();
 });
@@ -148,7 +147,7 @@ app.get('/users', listUsers);
 app.get('/users/:id', userDetails);
 app.post('/users', createUser);
 app.put('/users/:id', updateUser);
-app.delete('/users/:id', deleteUser);
+app.del('/users/:id', deleteUser);
 
 //and ends here */
 
