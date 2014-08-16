@@ -1,17 +1,15 @@
 {
-  "name": "devmen_tutorial",
+  "name": "user_manager",
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.6.3",
-    "ejs": "^1.0.0",
-    "express": "^4.8.3"
+    "express": "^4.8.3",
+	  "nohm": "0.9.5",
+	  "redis": "2.8.13"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  "engines" : {
+  	"node" : "0.19.x",
+	  "npm": "~1.0.20"
+  }
 }
