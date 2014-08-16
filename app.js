@@ -1,52 +1,9 @@
-// app.js
-
 var express = require('express');
 var app = express();
 app.use(express.bodyParser());
 var nohm = require('nohm').Nohm;
 
 
-
-//app.set('view engine', 'ejs');
-//app.set('views', path.join(__dirname, 'views'));
-
-
-// path set to bower components
-//app.use(express.static(path.join(__dirname, 'bower_components/')));
-
-/*
-var userList = [
-	{id: 1, firstName: 'Cam', lastName: 'Yee', email: 'makakoa57@gmail.com'}	
-];
-
-app.get('/', function(req, res) {
-	// load db data here
-	res.render('index', {
-		title: 'User Manager',
-		users: userList
-	});
-});
-
-app.post('/add', function(req, res) {
-	var newUser = req.body.newUser;
-	var userLast = req.body.userLastName;
-	var userEmail = req.body.userEmail;
-	userList.push({
-		id: userList.length + 1,
-		firstName: newUser,
-		lastName: userLast,
-		email: userEmail
-	});
-	
-	res.redirect('/');
-})
-*/
-
-
-
-
-// redis url: redis://redistogo:24fbdf461f5cbfb355a43a2360a2a394@hoki.redistogo.com:10124 or process.env.RESDISTOGO_URL
-// for use: https://devcenter.heroku.com/articles/redistogo
 if (process.env.RESDISTOGO_URL) {
   
   var rtg   = require("url").parse(process.env.RESDISTOGO_URL);
@@ -59,9 +16,6 @@ if (process.env.RESDISTOGO_URL) {
 
 nohm.setClient(redis);
 
-
-//backbone code starts here
-// comment out backbone for TS - no change
 
 var User = nohm.model('User', {
 	properties: {
@@ -148,9 +102,6 @@ app.get('/users/:id', userDetails);
 app.post('/users', createUser);
 app.put('/users/:id', updateUser);
 app.del('/users/:id', deleteUser);
-
-//and ends here */
-
 
 
 var port = process.env.PORT || 1337;
