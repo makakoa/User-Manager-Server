@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "nohm": "^0.9.5",
-    "express": "^4.8.3",
+    "nohm": "~0.9.1",
+    "express": "~3.0.0",
     "redis": "~0.8.1"
   },
   "devDependencies": {},
