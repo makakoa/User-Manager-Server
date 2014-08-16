@@ -6,7 +6,7 @@
   "dependencies": {
     "nohm": "^0.9.5",
     "express": "^4.8.3",
-    "redis": "^0.12.1"
+    "redis": "~0.8.1"
   },
   "devDependencies": {},
   "scripts": {
