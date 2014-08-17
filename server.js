@@ -3,18 +3,6 @@ var app = express();
 app.use(express.bodyParser());
 var nohm = require('nohm').Nohm;
 
-/*
-var allowCrossDomain = function(req,res,next) {
-	if('OPTIONS' == req.method) {
-		res.send(200);
-	} else {
-		next();
-	}
-};
-
-app.use(allowCrossDomain);
-*/
-
 if (process.env.REDISTOGO_URL) {
   
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
@@ -104,7 +92,7 @@ var deleteUser = function(req, res) {
 app.all('*', function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
 	res.header("Content-Type", "application/json");
 	if('OPTIONS' == req.method) {
 		res.send(200);
