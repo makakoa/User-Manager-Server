@@ -14,6 +14,12 @@ if (process.env.REDISTOGO_URL) {
   var redis = require("redis").createClient();
 }
 
+if(req.method === 'OPTIONS') {
+	console.log('!OPTIONS');
+	res.end();
+}
+
+
 nohm.setClient(redis);
 
 
