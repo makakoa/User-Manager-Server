@@ -3,6 +3,15 @@ var app = express();
 app.use(express.bodyParser());
 var nohm = require('nohm').Nohm;
 
+var allowCrossDomain = function(req,res,next) {
+	if('OPTIONS' == req.method) {
+		res.send(200);
+	} else {
+		next();
+	}
+};
+
+app.use(allowCrossDomain);
 
 if (process.env.REDISTOGO_URL) {
   
@@ -13,12 +22,6 @@ if (process.env.REDISTOGO_URL) {
 } else {
   var redis = require("redis").createClient();
 }
-
-if(req.method === 'OPTIONS') {
-	console.log('!OPTIONS');
-	res.end();
-}
-
 
 nohm.setClient(redis);
 
